@@ -1,7 +1,18 @@
-[gd_scene format=2]
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/ship.gd" type="Script" id=1]
+[ext_resource path="res://sprite/ship.png" type="Texture" id=2]
+[ext_resource path="res://sprite/turret.png" type="Texture" id=3]
+[ext_resource path="res://sprite/main_gun.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 320, 70 )
 
 [node name="ship" type="RigidBody2D" index="0"]
 
+position = Vector2( 500, 210 )
 input_pickable = false
 collision_layer = 1
 collision_mask = 1
@@ -9,7 +20,7 @@ mode = 0
 mass = 1.0
 friction = 1.0
 bounce = 0.0
-gravity_scale = 1.0
+gravity_scale = 0.0
 custom_integrator = false
 continuous_cd = 0
 contacts_reported = 0
@@ -17,8 +28,344 @@ contact_monitor = false
 sleeping = false
 can_sleep = true
 linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
+linear_damp = 1.0
 angular_velocity = 0.0
-angular_damp = -1.0
+angular_damp = 1.0
+script = ExtResource( 1 )
+_sections_unfolded = [ "Angular", "Applied Forces", "Linear" ]
+thrust = 10000
+turn_thrust = 100000
+turret_turn_speed = 1
+turret_return_speed = 1
+left_arc_start = -30
+left_arc_end = -150
+left_turret_rest = -90
+right_arc_start = 30
+right_arc_end = 150
+right_turret_rest = 90
+main_arc_start = -20
+main_arc_end = 20
+main_turret_rest = 0
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+shape = SubResource( 1 )
+
+[node name="right_bank" type="Node2D" parent="." index="2"]
+
+editor/display_folded = true
+
+[node name="turret_right" type="Area2D" parent="right_bank" index="0"]
+
+editor/display_folded = true
+position = Vector2( -196.049, 50.0964 )
+rotation = 1.5708
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="right_bank/turret_right" index="0"]
+
+position = Vector2( 23.3016, -2.50937 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="muzzle" type="Position2D" parent="right_bank/turret_right" index="1"]
+
+position = Vector2( 71.3387, -2.15091 )
+
+[node name="turret_right2" type="Area2D" parent="right_bank" index="1"]
+
+editor/display_folded = true
+position = Vector2( -108.107, 50.584 )
+rotation = 1.5708
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="right_bank/turret_right2" index="0"]
+
+position = Vector2( 23.3016, -2.50937 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="muzzle" type="Position2D" parent="right_bank/turret_right2" index="1"]
+
+position = Vector2( 71.3387, -2.15091 )
+
+[node name="turret_right3" type="Area2D" parent="right_bank" index="2"]
+
+editor/display_folded = true
+position = Vector2( -20.0146, 51.188 )
+rotation = 1.5708
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="right_bank/turret_right3" index="0"]
+
+position = Vector2( 23.3016, -2.50937 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="muzzle" type="Position2D" parent="right_bank/turret_right3" index="1"]
+
+position = Vector2( 71.3387, -2.15091 )
+
+[node name="turret_right4" type="Area2D" parent="right_bank" index="3"]
+
+editor/display_folded = true
+position = Vector2( 64.2682, 51.6647 )
+rotation = 1.5708
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="right_bank/turret_right4" index="0"]
+
+position = Vector2( 23.3016, -2.50937 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="muzzle" type="Position2D" parent="right_bank/turret_right4" index="1"]
+
+position = Vector2( 71.3387, -2.15091 )
+
+[node name="turret_right5" type="Area2D" parent="right_bank" index="4"]
+
+editor/display_folded = true
+position = Vector2( 155.484, 50.7947 )
+rotation = 1.5708
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="right_bank/turret_right5" index="0"]
+
+position = Vector2( 23.3016, -2.50937 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="muzzle" type="Position2D" parent="right_bank/turret_right5" index="1"]
+
+position = Vector2( 71.3387, -2.15091 )
+
+[node name="left_bank" type="Node2D" parent="." index="3"]
+
+editor/display_folded = true
+
+[node name="turret_left" type="Area2D" parent="left_bank" index="0"]
+
+editor/display_folded = true
+position = Vector2( 159.794, -55.5565 )
+rotation = -1.5708
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="left_bank/turret_left" index="0"]
+
+position = Vector2( 23.3016, -2.50937 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="muzzle" type="Position2D" parent="left_bank/turret_left" index="1"]
+
+position = Vector2( 71.3387, -2.15091 )
+
+[node name="turret_left2" type="Area2D" parent="left_bank" index="1"]
+
+editor/display_folded = true
+position = Vector2( 69.3839, -53.9275 )
+rotation = -1.5708
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="left_bank/turret_left2" index="0"]
+
+position = Vector2( 23.3016, -2.50937 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="muzzle" type="Position2D" parent="left_bank/turret_left2" index="1"]
+
+position = Vector2( 71.3387, -2.15091 )
+
+[node name="turret_left3" type="Area2D" parent="left_bank" index="2"]
+
+editor/display_folded = true
+position = Vector2( -17.7682, -53.9275 )
+rotation = -1.5708
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="left_bank/turret_left3" index="0"]
+
+position = Vector2( 23.3016, -2.50937 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="muzzle" type="Position2D" parent="left_bank/turret_left3" index="1"]
+
+position = Vector2( 71.3387, -2.15091 )
+
+[node name="turret_left4" type="Area2D" parent="left_bank" index="3"]
+
+editor/display_folded = true
+position = Vector2( -106.549, -58 )
+rotation = -1.5708
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="left_bank/turret_left4" index="0"]
+
+position = Vector2( 23.3016, -2.50937 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="muzzle" type="Position2D" parent="left_bank/turret_left4" index="1"]
+
+position = Vector2( 71.3387, -2.15091 )
+
+[node name="turret_left5" type="Area2D" parent="left_bank" index="4"]
+
+editor/display_folded = true
+position = Vector2( -188, -56.371 )
+rotation = -1.5708
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="left_bank/turret_left5" index="0"]
+
+position = Vector2( 23.3016, -2.50937 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="muzzle" type="Position2D" parent="left_bank/turret_left5" index="1"]
+
+position = Vector2( 71.3387, -2.15091 )
+
+[node name="front_gun" type="Node2D" parent="." index="4"]
+
+editor/display_folded = true
+show_behind_parent = true
+_sections_unfolded = [ "Material", "Visibility" ]
+
+[node name="main_gun" type="Area2D" parent="front_gun" index="0"]
+
+position = Vector2( 300, 0 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="Sprite" type="Sprite" parent="front_gun/main_gun" index="0"]
+
+show_behind_parent = true
+position = Vector2( 30, 0 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 
