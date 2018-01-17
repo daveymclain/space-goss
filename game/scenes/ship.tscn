@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/ship.gd" type="Script" id=1]
 [ext_resource path="res://sprite/ship.png" type="Texture" id=2]
 [ext_resource path="res://sprite/turret.png" type="Texture" id=3]
-[ext_resource path="res://sprite/main_gun.png" type="Texture" id=4]
+[ext_resource path="res://scenes/left_bank.gd" type="Script" id=4]
+[ext_resource path="res://sprite/main_gun.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -148,10 +149,10 @@ audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Angular", "Applied Forces", "Linear", "Transform" ]
-thrust = 40
-turn_thrust = 0.2
+thrust = 1.5
+turn_thrust = 0.01
 turret_turn_speed = 0.5
-turret_return_speed = 1
+turret_return_speed = 0.5
 left_arc_start = -30
 left_arc_end = -150
 left_turret_rest = -90
@@ -317,11 +318,17 @@ position = Vector2( 71.3387, -2.15091 )
 [node name="left_bank" type="Node2D" parent="." index="3"]
 
 editor/display_folded = true
+script = ExtResource( 4 )
+turret_turn_speed = 0.5
+turret_return_speed = 0.5
+arc_start = -30
+arc_end = -150
+rest_pos = -90
 
 [node name="turret_left" type="Area2D" parent="left_bank" index="0"]
 
 editor/display_folded = true
-position = Vector2( 159.794, -55.5565 )
+position = Vector2( 160.569, -52.0697 )
 rotation = -1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -349,7 +356,7 @@ position = Vector2( 71.3387, -2.15091 )
 [node name="turret_left2" type="Area2D" parent="left_bank" index="1"]
 
 editor/display_folded = true
-position = Vector2( 69.3839, -53.9275 )
+position = Vector2( 71.7086, -52.3778 )
 rotation = -1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -377,7 +384,7 @@ position = Vector2( 71.3387, -2.15091 )
 [node name="turret_left3" type="Area2D" parent="left_bank" index="2"]
 
 editor/display_folded = true
-position = Vector2( -17.7682, -53.9275 )
+position = Vector2( -15.0562, -51.603 )
 rotation = -1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -405,7 +412,7 @@ position = Vector2( 71.3387, -2.15091 )
 [node name="turret_left4" type="Area2D" parent="left_bank" index="3"]
 
 editor/display_folded = true
-position = Vector2( -106.549, -58 )
+position = Vector2( -105.774, -50.639 )
 rotation = -1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -433,7 +440,7 @@ position = Vector2( 71.3387, -2.15091 )
 [node name="turret_left5" type="Area2D" parent="left_bank" index="4"]
 
 editor/display_folded = true
-position = Vector2( -188, -56.371 )
+position = Vector2( -187.613, -51.7219 )
 rotation = -1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -480,7 +487,7 @@ audio_bus_name = "Master"
 show_behind_parent = true
 position = Vector2( 30, 0 )
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="engines" type="Node2D" parent="." index="5"]
