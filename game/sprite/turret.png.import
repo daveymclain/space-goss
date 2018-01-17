@@ -6,11 +6,7 @@ path="res://.import/turret.png-f3c601abee77ee8a612f5e65b656d8a9.stex"
 
 [deps]
 
-source_file="res://sprite/turret.png"
-source_md5="e73da3f6335bad848351c8fc0b85e9fd"
-
-dest_files=[ "res://.import/turret.png-f3c601abee77ee8a612f5e65b656d8a9.stex" ]
-dest_md5="1428aae3a4b59bbbe2e17d815899299e"
+source_md5="47a707de17759dbbb1efbdc9a67ba091"
 
 [params]
 

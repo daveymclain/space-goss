@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/ship.gd" type="Script" id=1]
 [ext_resource path="res://sprite/ship.png" type="Texture" id=2]
 [ext_resource path="res://sprite/turret.png" type="Texture" id=3]
-[ext_resource path="res://scenes/left_bank.gd" type="Script" id=4]
-[ext_resource path="res://sprite/main_gun.png" type="Texture" id=5]
+[ext_resource path="res://sprite/main_gun.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -173,12 +172,10 @@ shape = SubResource( 1 )
 
 [node name="right_bank" type="Node2D" parent="." index="2"]
 
-editor/display_folded = true
-
 [node name="turret_right" type="Area2D" parent="right_bank" index="0"]
 
 editor/display_folded = true
-position = Vector2( -196.049, 50.0964 )
+position = Vector2( -197.217, 44.2566 )
 rotation = 1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -206,7 +203,7 @@ position = Vector2( 71.3387, -2.15091 )
 [node name="turret_right2" type="Area2D" parent="right_bank" index="1"]
 
 editor/display_folded = true
-position = Vector2( -108.107, 50.584 )
+position = Vector2( -109.275, 44.7442 )
 rotation = 1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -234,7 +231,7 @@ position = Vector2( 71.3387, -2.15091 )
 [node name="turret_right3" type="Area2D" parent="right_bank" index="2"]
 
 editor/display_folded = true
-position = Vector2( -20.0146, 51.188 )
+position = Vector2( -21.1825, 45.3482 )
 rotation = 1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -262,7 +259,7 @@ position = Vector2( 71.3387, -2.15091 )
 [node name="turret_right4" type="Area2D" parent="right_bank" index="3"]
 
 editor/display_folded = true
-position = Vector2( 64.2682, 51.6647 )
+position = Vector2( 63.1003, 45.8249 )
 rotation = 1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -290,7 +287,7 @@ position = Vector2( 71.3387, -2.15091 )
 [node name="turret_right5" type="Area2D" parent="right_bank" index="4"]
 
 editor/display_folded = true
-position = Vector2( 155.484, 50.7947 )
+position = Vector2( 154.316, 44.9549 )
 rotation = 1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -318,17 +315,11 @@ position = Vector2( 71.3387, -2.15091 )
 [node name="left_bank" type="Node2D" parent="." index="3"]
 
 editor/display_folded = true
-script = ExtResource( 4 )
-turret_turn_speed = 0.5
-turret_return_speed = 0.5
-arc_start = -30
-arc_end = -150
-rest_pos = -90
 
 [node name="turret_left" type="Area2D" parent="left_bank" index="0"]
 
 editor/display_folded = true
-position = Vector2( 160.569, -52.0697 )
+position = Vector2( 160.766, -45.9398 )
 rotation = -1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -356,7 +347,7 @@ position = Vector2( 71.3387, -2.15091 )
 [node name="turret_left2" type="Area2D" parent="left_bank" index="1"]
 
 editor/display_folded = true
-position = Vector2( 71.7086, -52.3778 )
+position = Vector2( 71.9058, -46.248 )
 rotation = -1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -384,7 +375,7 @@ position = Vector2( 71.3387, -2.15091 )
 [node name="turret_left3" type="Area2D" parent="left_bank" index="2"]
 
 editor/display_folded = true
-position = Vector2( -15.0562, -51.603 )
+position = Vector2( -14.859, -45.4732 )
 rotation = -1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -412,7 +403,7 @@ position = Vector2( 71.3387, -2.15091 )
 [node name="turret_left4" type="Area2D" parent="left_bank" index="3"]
 
 editor/display_folded = true
-position = Vector2( -105.774, -50.639 )
+position = Vector2( -105.577, -44.5092 )
 rotation = -1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -440,7 +431,7 @@ position = Vector2( 71.3387, -2.15091 )
 [node name="turret_left5" type="Area2D" parent="left_bank" index="4"]
 
 editor/display_folded = true
-position = Vector2( -187.613, -51.7219 )
+position = Vector2( -187.416, -45.5921 )
 rotation = -1.5708
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -487,7 +478,7 @@ audio_bus_name = "Master"
 show_behind_parent = true
 position = Vector2( 30, 0 )
 scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="engines" type="Node2D" parent="." index="5"]
