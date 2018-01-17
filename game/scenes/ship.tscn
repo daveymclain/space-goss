@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/ship.gd" type="Script" id=1]
 [ext_resource path="res://sprite/ship.png" type="Texture" id=2]
@@ -9,6 +9,131 @@
 
 custom_solver_bias = 0.0
 extents = Vector2( 320, 70 )
+
+[sub_resource type="Gradient" id=2]
+
+offsets = PoolRealArray( 0, 0.52071, 1 )
+colors = PoolColorArray( 1, 0.703125, 0, 1, 0.90625, 0.409151, 0.166382, 1, 0.644531, 0.644531, 0.644531, 0.867412 )
+
+[sub_resource type="GradientTexture" id=3]
+
+gradient = SubResource( 2 )
+width = 2048
+
+[sub_resource type="Curve" id=4]
+
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.145508 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+
+width = 2048
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 1
+emission_sphere_radius = 20.0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 0.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 0.0
+angular_velocity = 50.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 15.0
+scale_random = 0.0
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+
+[sub_resource type="Gradient" id=7]
+
+offsets = PoolRealArray( 0, 0.331361, 1 )
+colors = PoolColorArray( 1, 0.9375, 0, 1, 1, 0.515625, 0, 1, 0.101563, 0.101563, 0.101563, 0.917137 )
+
+[sub_resource type="GradientTexture" id=8]
+
+gradient = SubResource( 7 )
+width = 2048
+
+[sub_resource type="Curve" id=9]
+
+min_value = 0.0
+max_value = 1.0
+bake_resolution = 100
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=10]
+
+width = 2048
+curve = SubResource( 9 )
+
+[sub_resource type="ParticlesMaterial" id=11]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 1
+emission_sphere_radius = 7.0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 0.0
+flatness = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 0.0
+angular_velocity = 9.41673e-43
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 100.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 50.0
+angle_random = 1.0
+scale = 15.0
+scale_random = 0.0
+scale_curve = SubResource( 10 )
+color_ramp = SubResource( 8 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+_sections_unfolded = [ "Color" ]
 
 [node name="ship" type="RigidBody2D" index="0"]
 
@@ -32,10 +157,10 @@ linear_damp = 1.0
 angular_velocity = 0.0
 angular_damp = 1.0
 script = ExtResource( 1 )
-_sections_unfolded = [ "Angular", "Applied Forces", "Linear" ]
+_sections_unfolded = [ "Angular", "Applied Forces", "Linear", "Transform" ]
 thrust = 10000
 turn_thrust = 100000
-turret_turn_speed = 1
+turret_turn_speed = 0.5
 turret_return_speed = 1
 left_arc_start = -30
 left_arc_end = -150
@@ -367,5 +492,110 @@ position = Vector2( 30, 0 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="engines" type="Node2D" parent="." index="5"]
+
+show_behind_parent = true
+_sections_unfolded = [ "Visibility" ]
+
+[node name="main" type="Particles2D" parent="engines" index="0"]
+
+show_behind_parent = true
+position = Vector2( -319.925, -29.8005 )
+rotation = 3.14159
+emitting = false
+amount = 100
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 3.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 6 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Process Material", "Time", "Visibility" ]
+
+[node name="main2" type="Particles2D" parent="engines" index="1"]
+
+show_behind_parent = true
+position = Vector2( -316.315, 29.7645 )
+rotation = 3.14159
+emitting = true
+amount = 100
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 3.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 6 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Process Material", "Time", "Visibility" ]
+
+[node name="left" type="Particles2D" parent="engines" index="2"]
+
+show_behind_parent = true
+position = Vector2( -273.987, -103.468 )
+rotation = 3.14159
+emitting = true
+amount = 100
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 3.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 11 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Process Material", "Time" ]
+
+[node name="right" type="Particles2D" parent="engines" index="3"]
+
+show_behind_parent = true
+position = Vector2( -273.987, 100.868 )
+rotation = 3.14159
+emitting = true
+amount = 100
+lifetime = 1.0
+one_shot = false
+preprocess = 0.0
+speed_scale = 3.0
+explosiveness = 0.0
+randomness = 0.0
+fixed_fps = 0
+fract_delta = true
+visibility_rect = Rect2( -100, -100, 200, 200 )
+local_coords = true
+draw_order = 0
+process_material = SubResource( 11 )
+texture = null
+normal_map = null
+h_frames = 1
+v_frames = 1
+_sections_unfolded = [ "Process Material" ]
 
 

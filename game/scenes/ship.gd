@@ -3,7 +3,7 @@ extends RigidBody2D
 export var thrust = 500
 export var turn_thrust = 2000
 # both turrets
-export var turret_turn_speed = 1
+export var turret_turn_speed = .5
 export var turret_return_speed = 1
 # left turrets
 export var left_arc_start = -30
@@ -21,6 +21,7 @@ export var main_turret_rest = 0
 onready var turret_bank_left = get_node("left_bank")
 onready var turret_bank_right = get_node("right_bank")
 onready var front_gun = get_node("front_gun")
+onready var engines = get_node("engines")
 
 var boost_on = false
 var thrust_on = false
@@ -46,10 +47,12 @@ func _process(delta):
 		if !boost_on:
 			vel = thrust
 		thrust_on = true
+		
 	else:
 		if !(boost_on):
 			vel = 0
 		thrust_on = false
+	engines(thrust_on,turn)
 	turret_aim(turret_bank_left, left_arc_start, left_arc_end, left_turret_rest)
 	turret_aim(turret_bank_right, right_arc_start, right_arc_end, right_turret_rest)
 	turret_aim(front_gun, main_arc_start, main_arc_end, main_turret_rest)
@@ -78,6 +81,20 @@ func turret_aim(node,arc_start,arc_end,rest_pos):
 				c -= turret_return_speed
 		N.set_rotation(deg2rad(c))
 
+func engines(thrust,turn_thrust):
+	for N in engines.get_children():
+		N.emitting = thrust
+		print("true")
+		if N.get_name() == "left" and turn_thrust == -1:
+			N.emitting = true
+			N.lifetime = 1.8
+		elif N.get_name() == "right" and turn_thrust == 1:
+			N.emitting = true
+			N.lifetime = 1.8
+		else:
+			N.lifetime = 1
+	
+		
 	
 func _physics_process(delta):
 	
