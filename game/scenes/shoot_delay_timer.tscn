@@ -2,7 +2,7 @@
 
 [ext_resource path="res://shoot_delay_timer.gd" type="Script" id=1]
 
-[node name="shoot_delay_timer" type="Timer" index="0"]
+[node name="shoot_delay_timer" type="Timer"]
 
 process_mode = 1
 wait_time = 0.2

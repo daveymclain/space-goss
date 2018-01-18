@@ -135,15 +135,15 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color" ]
 
-[node name="ship" type="Area2D"]
+[node name="ship" type="Area2D" index="0"]
 
 position = Vector2( 500, 210 )
 scale = Vector2( 0.5, 0.5 )
 input_pickable = false
 gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 1.0
-angular_damp = 1.0
+gravity = 0.0
+linear_damp = 0.0
+angular_damp = 0.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
@@ -176,7 +176,6 @@ editor/display_folded = true
 
 [node name="turret_right" type="Area2D" parent="right_bank" index="0"]
 
-editor/display_folded = true
 position = Vector2( -197.217, 44.2566 )
 rotation = 1.5708
 input_pickable = true
@@ -187,9 +186,6 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 _sections_unfolded = [ "Transform" ]
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="right_bank/turret_right" index="0"]
 
@@ -320,7 +316,6 @@ editor/display_folded = true
 
 [node name="turret_left" type="Area2D" parent="left_bank" index="0"]
 
-editor/display_folded = true
 position = Vector2( 160.766, -45.9398 )
 rotation = -1.5708
 input_pickable = true
@@ -482,6 +477,12 @@ position = Vector2( 30, 0 )
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="muzzle" type="Position2D" parent="front_gun/main_gun" index="1"]
+
+position = Vector2( 99.321, -0.205261 )
+rotation = -1.5708
+scale = Vector2( 1, 1 )
 
 [node name="engines" type="Node2D" parent="." index="5"]
 

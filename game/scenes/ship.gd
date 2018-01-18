@@ -31,6 +31,7 @@ onready var bullet = load("res://scenes/bullet.tscn")
 onready var shoot_del_container = get_node("shoot_del_container")
 onready var shoot_del = load("res://scenes/shoot_delay_timer.tscn")
 
+# for use later when adding boost
 var boost_on = false
 var thrust_on = false
 
@@ -44,20 +45,22 @@ var pos = Vector2()
 var rot = 0
 # variable to tell which way the ship its turning. for use when turning the engine particles on
 var t = 0
-# array to stor which guns are delayed
+# arrays to see which guns are delayed
 var guns_delayed = []
 var guns_delayed_right = []
+var main_delayed = []
+
 
 func _ready():
 	set_process(true)
-	# set all the gun delays to false
+	# set all the gun delays to true except the starting guns
 	for i in 5:
 		guns_delayed.append(true)
 	guns_delayed[0] = false
 	for i in 5:
 		guns_delayed_right.append(true)
 	guns_delayed_right[0] = false
-
+	main_delayed.append(false)
 func _process(delta):
 	t = 0
 	if Input.is_action_pressed("player_left"):
@@ -82,17 +85,17 @@ func _process(delta):
 	set_position(pos)
 	set_rotation(rot)
 	
-	# slowly reduce momentum (fake physics
+	# slowly reduce momentum (fake physics)
 	if vel > 0:
 		vel *= .99
 	if turn > 0 or turn < 0:
 		turn *= .98
 	# turret aiming
-	turret_aim(turret_bank_left, left_arc_start, left_arc_end, left_turret_rest)
-	turret_aim(turret_bank_right, right_arc_start, right_arc_end, right_turret_rest)
-	turret_aim(front_gun, main_arc_start, main_arc_end, main_turret_rest)
+	turret_aim(turret_bank_left, left_arc_start, left_arc_end, left_turret_rest, guns_delayed)
+	turret_aim(turret_bank_right, right_arc_start, right_arc_end, right_turret_rest, guns_delayed_right)
+	turret_aim(front_gun, main_arc_start, main_arc_end, main_turret_rest, main_delayed)
 
-func turret_aim(node,arc_start,arc_end,rest_pos):
+func turret_aim(node, arc_start, arc_end, rest_pos, del_array):
 	# var for knowing which turret it is
 	var turret_num = 0
 	for N in node.get_children():
@@ -108,10 +111,10 @@ func turret_aim(node,arc_start,arc_end,rest_pos):
 		# see if mouse it in its arc and make sure it is not to close
 		if m_c < arc_start and m_c > arc_end and dis_mouse > 50:
 			# see if the gun delay is on
-			if !guns_delayed[turret_num]:
+			if !del_array[turret_num]:
 				if Input.is_action_pressed("player_shoot"):
 					# set the currect delay index to true 
-					guns_delayed[turret_num] = true
+					del_array[turret_num] = true
 					# create an individul timer fot the delay
 					var d = shoot_del.instance()
 					shoot_del_container.add_child(d)
@@ -130,16 +133,21 @@ func turret_aim(node,arc_start,arc_end,rest_pos):
 		# the same as above but for the other side
 		elif m_c > arc_start and m_c < arc_end and dis_mouse > 50:
 			# see if the gun delay is on
-			if !guns_delayed_right[turret_num]:
+			if !del_array[turret_num]:
 				if Input.is_action_pressed("player_shoot"):
 					# set the currect delay index to true 
-					guns_delayed_right[turret_num] = true
+					del_array[turret_num] = true
 					# create an individul timer fot the delay
 					var d = shoot_del.instance()
 					shoot_del_container.add_child(d)
 					# set the turret number in the timer so when it times out it knows which index to set to false again
 					d.turret = turret_num
-					d.right = true
+					# tell the shoot delay timer that it is the right side so it changes the right array
+					if del_array.size() > 1:
+						d.right = true
+					else:
+						d.main = true
+						d.wait_time = 1
 					# start the timer
 					d.start()
 					var b = bullet.instance()
