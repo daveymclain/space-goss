@@ -172,6 +172,8 @@ shape = SubResource( 1 )
 
 [node name="right_bank" type="Node2D" parent="." index="2"]
 
+editor/display_folded = true
+
 [node name="turret_right" type="Area2D" parent="right_bank" index="0"]
 
 editor/display_folded = true
@@ -483,6 +485,7 @@ _sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="engines" type="Node2D" parent="." index="5"]
 
+editor/display_folded = true
 show_behind_parent = true
 _sections_unfolded = [ "Visibility" ]
 
@@ -491,7 +494,7 @@ _sections_unfolded = [ "Visibility" ]
 show_behind_parent = true
 position = Vector2( -319.925, -29.8005 )
 rotation = 3.14159
-emitting = false
+emitting = true
 amount = 100
 lifetime = 1.0
 one_shot = false
@@ -585,5 +588,9 @@ normal_map = null
 h_frames = 1
 v_frames = 1
 _sections_unfolded = [ "Process Material" ]
+
+[node name="bullet_container" type="Node" parent="." index="6"]
+
+[node name="shoot_del_container" type="Node" parent="." index="7"]
 
 
