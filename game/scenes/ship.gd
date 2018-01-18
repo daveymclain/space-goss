@@ -1,5 +1,7 @@
 extends Area2D
 
+
+
 export var thrust = 1.5
 export var turn_thrust = 0.01
 # both turrets
@@ -18,11 +20,16 @@ export var main_arc_start = -20
 export var main_arc_end = 20
 export var main_turret_rest = 0
 
+
+
 onready var turret_bank_left = get_node("left_bank")
 onready var turret_bank_right = get_node("right_bank")
 onready var front_gun = get_node("front_gun")
 onready var engines = get_node("engines")
-
+onready var bullet_container = get_node("bullet_container")
+onready var bullet = load("res://scenes/bullet.tscn")
+onready var shoot_del_container = get_node("shoot_del_container")
+onready var shoot_del = load("res://scenes/shoot_delay_timer.tscn")
 
 var boost_on = false
 var thrust_on = false
@@ -37,15 +44,22 @@ var pos = Vector2()
 var rot = 0
 # variable to tell which way the ship its turning. for use when turning the engine particles on
 var t = 0
-
-var t_1 = Thread.new()
+# array to stor which guns are delayed
+var guns_delayed = []
+var guns_delayed_right = []
 
 func _ready():
 	set_process(true)
+	# set all the gun delays to false
+	for i in 5:
+		guns_delayed.append(true)
+	guns_delayed[0] = false
+	for i in 5:
+		guns_delayed_right.append(true)
+	guns_delayed_right[0] = false
 
 func _process(delta):
 	t = 0
-	
 	if Input.is_action_pressed("player_left"):
 		turn -= turn_thrust
 		t = 1
@@ -79,8 +93,10 @@ func _process(delta):
 	turret_aim(front_gun, main_arc_start, main_arc_end, main_turret_rest)
 
 func turret_aim(node,arc_start,arc_end,rest_pos):
-
+	# var for knowing which turret it is
+	var turret_num = 0
 	for N in node.get_children():
+		
 		# curret turret rotation
 		var c = rad2deg(N.get_rotation())
 		# angle from turret to mouse
@@ -91,12 +107,44 @@ func turret_aim(node,arc_start,arc_end,rest_pos):
 		var dis_mouse = N.get_global_position().distance_to(get_global_mouse_position())
 		# see if mouse it in its arc and make sure it is not to close
 		if m_c < arc_start and m_c > arc_end and dis_mouse > 50:
+			# see if the gun delay is on
+			if !guns_delayed[turret_num]:
+				if Input.is_action_pressed("player_shoot"):
+					# set the currect delay index to true 
+					guns_delayed[turret_num] = true
+					# create an individul timer fot the delay
+					var d = shoot_del.instance()
+					shoot_del_container.add_child(d)
+					# set the turret number in the timer so when it times out it knows which index to set to false again
+					d.turret = turret_num
+					# start the timer
+					d.start()
+					var b = bullet.instance()
+					bullet_container.add_child(b)
+					b.fire(N.get_node("muzzle").get_global_position(),N.get_global_rotation())
+				
 			if m > 1.5:
 				c += turret_turn_speed
 			elif m < -1.5: 
 				c -= turret_turn_speed
 		# the same as above but for the other side
 		elif m_c > arc_start and m_c < arc_end and dis_mouse > 50:
+			# see if the gun delay is on
+			if !guns_delayed_right[turret_num]:
+				if Input.is_action_pressed("player_shoot"):
+					# set the currect delay index to true 
+					guns_delayed_right[turret_num] = true
+					# create an individul timer fot the delay
+					var d = shoot_del.instance()
+					shoot_del_container.add_child(d)
+					# set the turret number in the timer so when it times out it knows which index to set to false again
+					d.turret = turret_num
+					d.right = true
+					# start the timer
+					d.start()
+					var b = bullet.instance()
+					bullet_container.add_child(b)
+					b.fire(N.get_node("muzzle").get_global_position(),N.get_global_rotation())
 			if m > 1.5:
 				c += turret_turn_speed
 			elif m < -1.5: 
@@ -108,6 +156,7 @@ func turret_aim(node,arc_start,arc_end,rest_pos):
 			elif  c > rest_pos: 
 				c -= turret_return_speed
 		N.set_rotation(deg2rad(c))
+		turret_num += 1
 
 func engines(thrust,turn_thrust):
 	for N in engines.get_children():
