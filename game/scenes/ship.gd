@@ -51,8 +51,8 @@ func _ready():
 	set_process(true)
 	# set all the gun delays to false
 	for i in 5:
-		guns_delayed.append(false)
-		print(guns_delayed[i])
+		guns_delayed.append(true)
+	guns_delayed[0] = false
 
 func _process(delta):
 	t = 0

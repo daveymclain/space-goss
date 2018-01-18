@@ -9,7 +9,11 @@ func _ready():
 func _process(delta):
 	set_position(get_position() + vel * delta)
 func fire(t_start_pos,t_rot):
+	$Timer.start()
 	set_rotation(t_rot)
 	set_position(t_start_pos)
 	vel = Vector2(speed,0).rotated(t_rot)
 	
+
+func _on_Timer_timeout():
+	queue_free()
