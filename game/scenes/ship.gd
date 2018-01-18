@@ -46,6 +46,7 @@ var rot = 0
 var t = 0
 # array to stor which guns are delayed
 var guns_delayed = []
+var guns_delayed_right = []
 
 func _ready():
 	set_process(true)
@@ -53,6 +54,9 @@ func _ready():
 	for i in 5:
 		guns_delayed.append(true)
 	guns_delayed[0] = false
+	for i in 5:
+		guns_delayed_right.append(true)
+	guns_delayed_right[0] = false
 
 func _process(delta):
 	t = 0
@@ -125,6 +129,22 @@ func turret_aim(node,arc_start,arc_end,rest_pos):
 				c -= turret_turn_speed
 		# the same as above but for the other side
 		elif m_c > arc_start and m_c < arc_end and dis_mouse > 50:
+			# see if the gun delay is on
+			if !guns_delayed_right[turret_num]:
+				if Input.is_action_pressed("player_shoot"):
+					# set the currect delay index to true 
+					guns_delayed_right[turret_num] = true
+					# create an individul timer fot the delay
+					var d = shoot_del.instance()
+					shoot_del_container.add_child(d)
+					# set the turret number in the timer so when it times out it knows which index to set to false again
+					d.turret = turret_num
+					d.right = true
+					# start the timer
+					d.start()
+					var b = bullet.instance()
+					bullet_container.add_child(b)
+					b.fire(N.get_node("muzzle").get_global_position(),N.get_global_rotation())
 			if m > 1.5:
 				c += turret_turn_speed
 			elif m < -1.5: 

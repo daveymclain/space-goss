@@ -135,7 +135,7 @@ anim_offset_random = 0.0
 anim_loop = false
 _sections_unfolded = [ "Color" ]
 
-[node name="ship" type="Area2D" index="0"]
+[node name="ship" type="Area2D"]
 
 position = Vector2( 500, 210 )
 scale = Vector2( 0.5, 0.5 )
