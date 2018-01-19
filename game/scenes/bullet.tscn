@@ -9,7 +9,7 @@ custom_solver_bias = 0.0
 radius = 6.30834
 height = 24.2351
 
-[node name="bullet" type="Area2D"]
+[node name="bullet" type="Area2D" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -38,8 +38,8 @@ _sections_unfolded = [ "Transform" ]
 [node name="Timer" type="Timer" parent="." index="2"]
 
 process_mode = 1
-wait_time = 1.0
-one_shot = false
+wait_time = 2.0
+one_shot = true
 autostart = false
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

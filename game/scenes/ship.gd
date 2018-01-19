@@ -50,8 +50,11 @@ var guns_delayed = []
 var guns_delayed_right = []
 var main_delayed = []
 
+var screensize
 
 func _ready():
+	screensize = get_viewport().get_visible_rect().size
+	pos = (screensize / 2)
 	set_process(true)
 	# set all the gun delays to true except the starting guns
 	for i in 5:

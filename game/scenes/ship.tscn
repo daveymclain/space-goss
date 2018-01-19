@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/ship.gd" type="Script" id=1]
 [ext_resource path="res://sprite/ship.png" type="Texture" id=2]
 [ext_resource path="res://sprite/turret.png" type="Texture" id=3]
 [ext_resource path="res://sprite/main_gun.png" type="Texture" id=4]
+[ext_resource path="res://sprite/shield_green.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -482,7 +483,6 @@ _sections_unfolded = [ "Transform", "Visibility" ]
 
 position = Vector2( 99.321, -0.205261 )
 rotation = -1.5708
-scale = Vector2( 1, 1 )
 
 [node name="engines" type="Node2D" parent="." index="5"]
 
@@ -593,5 +593,130 @@ _sections_unfolded = [ "Process Material" ]
 [node name="bullet_container" type="Node" parent="." index="6"]
 
 [node name="shoot_del_container" type="Node" parent="." index="7"]
+
+[node name="shields" type="Node2D" parent="." index="8"]
+
+editor/display_folded = true
+position = Vector2( -995.001, -425.495 )
+scale = Vector2( 2, 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="sheld_front_left" type="Area2D" parent="shields" index="0"]
+
+editor/display_folded = true
+position = Vector2( 642.2, 183.908 )
+scale = Vector2( 1.2, 1.2 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="shields/sheld_front_left" index="0"]
+
+position = Vector2( -18.9758, -19.1949 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="shields/sheld_front_left" index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( -112.255, -45.2386, -107.838, -60.2275, -22.322, -58.3342, 20.8003, -49.0434, 54.407, -25.0611, 67.8182, -2.18324, 73.6559, 15.9613, 59.6137, 22.1146, 53.9337, 1.91899, 39.1025, -19.8544, 12.9114, -36.5789, -24.4821, -43.2056, -79.8622, -44.9411 )
+
+[node name="sheld_front_left4" type="Area2D" parent="shields" index="1"]
+
+editor/display_folded = true
+position = Vector2( 367.956, 182.775 )
+rotation = 3.14159
+scale = Vector2( 1.2, -1.2 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="shields/sheld_front_left4" index="0"]
+
+position = Vector2( -18.9758, -19.1949 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="shields/sheld_front_left4" index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( -112.255, -45.2386, -107.838, -60.2275, -22.322, -58.3342, 20.8003, -49.0434, 54.407, -25.0611, 67.8182, -2.18324, 73.6559, 15.9613, 59.6137, 22.1146, 53.9337, 1.91899, 39.1025, -19.8544, 12.9114, -36.5789, -24.4821, -43.2056, -79.8622, -44.9411 )
+
+[node name="sheld_front_left2" type="Area2D" parent="shields" index="2"]
+
+editor/display_folded = true
+position = Vector2( 364.649, 242.689 )
+rotation = -3.14159
+scale = Vector2( 1.2, 1.2 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="shields/sheld_front_left2" index="0"]
+
+position = Vector2( -18.9758, -19.1949 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="shields/sheld_front_left2" index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( -112.255, -45.2386, -107.838, -60.2275, -22.322, -58.3342, 20.8003, -49.0434, 54.407, -25.0611, 67.8182, -2.18324, 73.6559, 15.9613, 59.6137, 22.1146, 53.9337, 1.91899, 39.1025, -19.8544, 12.9114, -36.5789, -24.4821, -43.2056, -79.8622, -44.9411 )
+
+[node name="sheld_front_left3" type="Area2D" parent="shields" index="3"]
+
+editor/display_folded = true
+position = Vector2( 639.691, 241.608 )
+scale = Vector2( 1.2, -1.2 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="shields/sheld_front_left3" index="0"]
+
+position = Vector2( -18.9758, -19.1949 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="shields/sheld_front_left3" index="1"]
+
+build_mode = 0
+polygon = PoolVector2Array( -112.255, -45.2386, -107.838, -60.2275, -22.322, -58.3342, 20.8003, -49.0434, 54.407, -25.0611, 67.8182, -2.18324, 73.6559, 15.9613, 59.6137, 22.1146, 53.9337, 1.91899, 39.1025, -19.8544, 12.9114, -36.5789, -24.4821, -43.2056, -79.8622, -44.9411 )
 
 
